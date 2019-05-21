@@ -1,7 +1,7 @@
 import csv
 
 rels_list = []
-with open("relations_with_concepts.csv", newline='', encoding='utf8') as rels:
+with open("sem_classes/relations_with_concepts.csv", newline='', encoding='utf8') as rels:
     reader = csv.DictReader(rels, delimiter="\t")
     for row in reader:
         rels_list.append(row)
