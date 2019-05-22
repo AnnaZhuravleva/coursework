@@ -1,29 +1,61 @@
 import csv
 import pymorphy2
-from set_sem_rel import kinsoc
+from set_sem_rel import kinsoc, param
+from depth_search import *
 
 pmm = pymorphy2.MorphAnalyzer()
-data = []
 
-with open("data/Data-set.csv", newline='', encoding='utf8') as f:
-    reader = csv.DictReader(f, fieldnames=('№', 'Пример', 'Вершина', '', 'Зависимое', 'Зависимые вершины',
-                                           'Зависимые генитива', 'Отношение', 'Грамм. признаки вершины',
-                                           'Грам. признаки зависимого'))
-    for row in reader:
-        pair = {'Head': row['Вершина'].lower(), 'Gen': row['Зависимое'].lower(),
-                'HeadNorm': pmm.normal_forms(row['Вершина'].lower())[0],
-                'GenNorm': pmm.normal_forms(row['Зависимое'].lower())[0],
-                'HeadForm': row['Грамм. признаки вершины'], 'GenForm': row['Грам. признаки зависимого'],
-                'Rel': row['Отношение']}
-        data.append(pair)
 
-with open("result.csv", "w", newline='') as f:
-    header = ['Вершина', 'Зависимое', 'Лемма вершины', 'Лемма зависимого', 'Форма вершины', 'Форма зависимого',
-              'Отношение', 'Гиперонимы вершины', 'Гиперонимы зависимого', 'Ярлык']
-    writer = csv.writer(f, delimiter=',')
-    writer.writerow(header)
-    for i in range(50):
-        kinsoc(data[i])
-        print(data[i])
-        writer.writerow([data[i][key] for key in data[i]])
+def read_file():
+    data = []
+    with open("data/Data-set.csv", newline='', encoding='utf8') as f:
+        reader = csv.DictReader(f, fieldnames=('№', 'Пример', 'Вершина', '', 'Зависимое', 'Зависимые вершины',
+                                               'Зависимые генитива', 'Отношение', 'Грамм. признаки вершины',
+                                               'Грам. признаки зависимого'))
+        for row in reader:
+            pair = {'Head': row['Вершина'].lower(), 'Gen': row['Зависимое'].lower(),
+                    'HeadNorm': pmm.normal_forms(row['Вершина'].upper())[0],
+                    'GenNorm': pmm.normal_forms(row['Зависимое'].upper())[0],
+                    'HeadForm': row['Грамм. признаки вершины'], 'GenForm': row['Грам. признаки зависимого'],
+                    'Rel': row['Отношение'], 'HeadSem': '', 'GenSem': '', 'SetRel': ''}
+            data.append(pair)
+    return data
 
+
+def mark_corpus(data):
+    with open("resulttmp.csv", "w", newline='') as f:
+        header = ['Вершина', 'Зависимое', 'Лемма вершины', 'Лемма зависимого', 'Форма вершины', 'Форма зависимого',
+                  'Отношение', 'Гиперонимы вершины', 'Гиперонимы зависимого', 'Ярлык']
+        writer = csv.writer(f, delimiter=',')
+        writer.writerow(header)
+        for i in range(int(input("Введите количество предложений: "))):
+            a = get_supc([[data[i]['HeadNorm']]], rels_list, max_depth=9)
+            b = get_supc([[data[i]['GenNorm']]], rels_list, max_depth=9)
+            aa = list(set([item for inner in a for item in inner]))
+            bb = list(set([item for inner in b for item in inner]))
+            if len(aa) > 1:
+                data[i]['HeadSem'] = aa
+                print("\n URA! ", aa, data[i]['Head'], "\n")
+            if len(bb) > 1:
+                data[i]['GenSem'] = bb
+                print("\n URA! ", bb, data[i]['Gen'], "\n")
+            if data[i]['HeadForm'][5] == 'y':
+                try:
+                    rel = kinsoc(data[i])
+                except rel == 0:
+                    print(data[i]['Head'],'\nnot a kinsoc\n')
+            if data[i]['HeadForm'][5] == 'n':
+                try:
+                    rel = param(data[i])
+                except rel == 0:
+                    print(data[i]['Head'],'\nnot a param\n')
+
+            writer.writerow([data[i][key] for key in data[i]])
+
+
+data = read_file()
+mark_corpus(data)
+
+#if kinsoc(data[i]) == 0:
+#    param(data[i])
+#writer.writerow([data[i][key] for key in data[i]])

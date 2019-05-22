@@ -1,7 +1,7 @@
 import csv
 
 rels_list = []
-with open("sem_classes/relations_with_concepts.csv", newline='', encoding='utf8') as rels:
+with open("sem_classes/my_relations_with_concepts.csv", newline='', encoding='utf8') as rels:
     reader = csv.DictReader(rels, delimiter="\t")
     for row in reader:
         rels_list.append(row)
@@ -119,7 +119,6 @@ def get_subc(concept_list, rels_list, has_down=True, depth=0, max_depth=-1):
     if has_down:
         concept_list.append(new_list)
     return get_subc(concept_list, rels_list, has_down, depth+1, max_depth)
-
 """
 a = get_supc([['собака'], ['кошка']], rels_list)
 print(a)
@@ -189,3 +188,6 @@ print(c)
 # c = get_subc2([['собака']], rels_list, max_depth=2)
 # print(c)
 """
+
+
+
