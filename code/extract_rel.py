@@ -98,6 +98,8 @@ with open('sem_classes/PARAMStmp', 'w', encoding='utf-8') as f:
 
 #extract_hyponyms_to_file('sem_classes/MBtmp.txt', 4)
 
-sort_file('sem_classes/norel.txt')
+#sort_file('sem_classes/norel.txt')
 
 
+
+#sort_file('sem_classes/ACTtmp.txt')
