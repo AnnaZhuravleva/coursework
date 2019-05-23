@@ -30,3 +30,9 @@ def param(data):
         return 1
     return 0
 
+
+def membership(data):
+    return
+
+
+

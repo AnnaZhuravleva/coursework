@@ -50,10 +50,9 @@ def one_relation_corpus(data):  # extract one relation from corpus
                 # data[i]['GenSem'] = sorted(list(set([item for inner in b for item in inner])))
 
 
-
-def extract_hyponyms_to_file(name, filename, depth):
+def extract_hyponyms_to_file(filename, depth):
     with open(filename, 'a', encoding='utf-8') as f:
-        p = get_subc([[name]], rels_list, max_depth=depth)
+        p = get_subc([[str(input('Введите категорию: '))]], rels_list, max_depth=depth)
         aa = list(set([item for inner in p for item in inner]))
         f.write('\n'.join(aa))
 
@@ -97,6 +96,8 @@ with open('sem_classes/PARAMStmp', 'w', encoding='utf-8') as f:
 """
 
 
+#extract_hyponyms_to_file('sem_classes/MBtmp.txt', 4)
 
+sort_file('sem_classes/norel.txt')
 
 

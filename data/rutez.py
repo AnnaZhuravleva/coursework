@@ -35,7 +35,7 @@ with open('rutez.txt', 'r', encoding='utf-8') as f:
         bigline = [(tmp + l + '\n') for l in bigline]
         for line in bigline:
             r = small(line, categories)
-            with open('ruteztmptmp.txt', 'a', encoding='utf-8') as f:
+            with open('ruteztmp.txt', 'a', encoding='utf-8') as f:
                 f.write(''.join(r[0]))
                 f.write(''.join(r[1]))
 
