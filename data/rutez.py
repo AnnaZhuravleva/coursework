@@ -9,7 +9,7 @@ def sorted_relation_list():
                 rows.append(r)
         rows = sorted(rows[1:])
     with open('C:/Users/qwe/Documents/HSE/Coursework/code/sem_classes/my_relations.csv', "w", newline='') as f:
-        header = ['from', 'to', 'relation']
+        header = ['from	to	relation']
         writer = csv.writer(f, delimiter=',')
         writer.writerow(header)
         for i in range(len(rows)):
@@ -67,12 +67,35 @@ def format_first():
                 f.write(''.join(r[1]))
 
 
+def new_format_first():
+    with open('rutez.txt', 'r', encoding='utf-8') as f:
+        r = []
+        file = f.readlines()
+        head = file[0].strip('\n')
+        synonyms = file[1].split(', ')
+        synonyms = [s.strip('\n\(\)') for s in synonyms]
+        for line in file[2:]:
+            tmp = line.split(' ')[0]
+            line = line.split(str(tmp + ' '))[1]
+            if tmp == 'ВЫШЕ':
+                r.append('	'.join([head, line.strip('\n'), tmp]))
+                for s in synonyms:
+                    r.append('	'.join([s, line.strip('\n'), tmp]))
+            if tmp == 'НИЖЕ':
+                r.append('	'.join([line.strip('\n'), head, 'ВЫШЕ']))
+    with open('ruteztmp.txt', 'a', encoding='utf-8') as f:
+        f.write('\n'.join(r))
+        f.write('\n')
+    return
+
+
 while True:
-    a = int(input('continue? '))
+    a = int(input('continue? \n1: new article\n2: format\n3: sort\n4: exit\n'))
     if a == 1:
-        format_first()
+        new_format_first()
     elif a == 2:
         format_second()
     elif a == 3:
         sorted_relation_list()
-    break
+    elif a == 4:
+        break

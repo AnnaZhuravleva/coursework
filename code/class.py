@@ -38,11 +38,15 @@ def mark_corpus(data):
             if len(aa) > 1:
                 data[i]['HeadSem'] = aa
                 print("\n URA! ", aa, data[i]['Head'], "\n")
+            elif len(data[i]['HeadForm']) == 6 and data[i]['HeadForm'][1] == 'p' and data[i]['HeadForm'][5] == 'y':
+                data[i]['HeadSem'] = ['человек', 'субъект деятельности', 'имя']
             else:
                 norel.append(data[i]['HeadNorm'])
             if len(bb) > 1:
                 data[i]['GenSem'] = bb
                 print("\n URA! ", bb, data[i]['Gen'], "\n")
+            elif len(data[i]['GenForm']) == 6 and data[i]['GenForm'][1] == 'p' and data[i]['GenForm'][5] == 'y':
+                data[i]['HeadSem'] = ['человек', 'субъект деятельности', 'имя']
             else:
                 norel.append(data[i]['GenNorm'])
             writer.writerow([data[i][key] for key in data[i]])
