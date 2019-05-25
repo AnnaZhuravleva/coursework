@@ -7,66 +7,74 @@ from extract_rel import sort_file
 pmm = pymorphy2.MorphAnalyzer()
 
 
-def read_file():
+def read_blank_file():
     data = []
     with open("data/Data-set.csv", newline='', encoding='utf8') as f:
         reader = csv.DictReader(f, fieldnames=('№', 'Пример', 'Вершина', '', 'Зависимое', 'Зависимые вершины',
                                                'Зависимые генитива', 'Отношение', 'Грамм. признаки вершины',
                                                'Грам. признаки зависимого'))
         for row in reader:
-            pair = {'Head': row['Вершина'].lower(), 'Gen': row['Зависимое'].lower(),
-                    'HeadNorm': pmm.normal_forms(row['Вершина'].upper())[0],
-                    'GenNorm': pmm.normal_forms(row['Зависимое'].upper())[0],
+            pair = {'№': row['№'], 'Head': row['Вершина'].lower(), 'Gen': row['Зависимое'].lower(),
+                    'HeadNorm': pmm.normal_forms(row['Вершина'].strip('"').upper())[0],
+                    'GenNorm': pmm.normal_forms(row['Зависимое'].strip('"').upper())[0],
                     'HeadForm': row['Грамм. признаки вершины'], 'GenForm': row['Грам. признаки зависимого'],
                     'Rel': row['Отношение'], 'HeadSem': '', 'GenSem': '', 'SetRel': ''}
+            data.append(pair)
+    data = data[1:]
+    with open("data/Data-set_normalized.csv", "w", newline='', encoding='utf8') as f:
+        h = ['№', 'Head', 'Gen', 'HeadNorm', 'GenNorm', 'HeadForm', 'GenForm', 'Rel', 'HeadSem', 'GenSem', 'SetRel']
+        writer = csv.writer(f, delimiter=',')
+        writer.writerow(h)
+        for i in range(len(data)):
+            writer.writerow([data[i][key] for key in data[i]])
+    return
+
+
+def read_file_with_norm_forms():
+    data = []
+    with open("data/Data-set_normalized.csv", newline='', encoding='utf8') as f:
+        reader = csv.DictReader(f, fieldnames=('№','Head', 'Gen', 'HeadNorm', 'GenNorm', 'HeadForm', 'GenForm', 'Rel',
+                                               'HeadSem', 'GenSem', 'SetRel'))
+        for row in reader:
+            pair = {'№': row['№'], 'Head': row['Head'], 'Gen': row['Gen'].lower(),
+                    'HeadNorm': row['HeadNorm'], 'GenNorm': row['GenNorm'],
+                    'HeadForm': row['HeadForm'], 'GenForm': row['GenForm'],
+                    'Rel': row['Rel'], 'HeadSem': '', 'GenSem': '', 'SetRel': ''}
             data.append(pair)
     return data
 
 
 def mark_corpus(data):
     norel = []
-    with open("resulttmp.csv", "w", newline='') as f:
+    with open("result.csv", "w", newline='') as f:
         header = ['Вершина', 'Зависимое', 'Лемма вершины', 'Лемма зависимого', 'Форма вершины', 'Форма зависимого',
                   'Отношение', 'Гиперонимы вершины', 'Гиперонимы зависимого', 'Ярлык']
         writer = csv.writer(f, delimiter=',')
         writer.writerow(header)
-        for i in range(int(input("Введите количество предложений: "))):
+        for i in range(1, int(input("Введите количество предложений: "))):
             a = get_supc([[data[i]['HeadNorm']]], rels_list, max_depth=3)
             b = get_supc([[data[i]['GenNorm']]], rels_list, max_depth=3)
             aa = list(set([item for inner in a for item in inner]))
             bb = list(set([item for inner in b for item in inner]))
             if len(aa) > 1:
                 data[i]['HeadSem'] = aa
-                print("\n URA! ", aa, data[i]['Head'], "\n")
+                # print("\n URA! ", aa, data[i]['Head'], "\n")
             elif len(data[i]['HeadForm']) == 6 and data[i]['HeadForm'][1] == 'p' and data[i]['HeadForm'][5] == 'y':
                 data[i]['HeadSem'] = ['человек', 'субъект деятельности', 'имя']
             else:
                 norel.append(data[i]['HeadNorm'])
             if len(bb) > 1:
                 data[i]['GenSem'] = bb
-                print("\n URA! ", bb, data[i]['Gen'], "\n")
+                # print("\n URA! ", bb, data[i]['Gen'], "\n")
             elif len(data[i]['GenForm']) == 6 and data[i]['GenForm'][1] == 'p' and data[i]['GenForm'][5] == 'y':
-                data[i]['HeadSem'] = ['человек', 'субъект деятельности', 'имя']
+                data[i]['GenSem'] = ['человек', 'субъект деятельности', 'имя']
             else:
                 norel.append(data[i]['GenNorm'])
             writer.writerow([data[i][key] for key in data[i]])
+            # print(i)
     with open('sem_classes/norel.txt', 'w', encoding='utf-8') as f:
         f.write('\n'.join(norel))
     sort_file('sem_classes/norel.txt',)
-
-
-def read_file_with_norm_forms():
-    data = []
-    with open("data/Data-set.csv", newline='', encoding='utf8') as f:
-        reader = csv.DictReader(f, fieldnames=('Head', 'Gen', 'HeadNorm', 'GenNorm', 'HeadForm', 'GenForm', 'Rel',
-                                               'HeadSem', 'GenSem', 'SetRel'))
-        for row in reader:
-            pair = {'Head': row['Head'], 'Gen': row['Gen'].lower(),
-                    'HeadNorm': row['HeadNorm'], 'GenNorm': row['GenNorm'],
-                    'HeadForm': row['HeadForm'], 'GenForm': row['GenForm'],
-                    'Rel': row['Rel'], 'HeadSem': '', 'GenSem': '', 'SetRel': ''}
-            data.append(pair)
-    return data
 
 
 def set_rel():
@@ -83,9 +91,6 @@ def set_rel():
     return
 
 
+# read_blank_file()
 corpus = read_file_with_norm_forms()
 mark_corpus(corpus)
-
-# if kinsoc(data[i]) == 0:
-#     param(data[i])
-# writer.writerow([data[i][key] for key in data[i]])
