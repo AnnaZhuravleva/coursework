@@ -55,6 +55,19 @@ def mark_corpus(data):
     sort_file('sem_classes/norel.txt',)
 
 
+def read_file_with_norm_forms():
+    data = []
+    with open("data/Data-set.csv", newline='', encoding='utf8') as f:
+        reader = csv.DictReader(f, fieldnames=('Head', 'Gen', 'HeadNorm', 'GenNorm', 'HeadForm', 'GenForm', 'Rel',
+                                               'HeadSem', 'GenSem', 'SetRel'))
+        for row in reader:
+            pair = {'Head': row['Head'], 'Gen': row['Gen'].lower(),
+                    'HeadNorm': row['HeadNorm'], 'GenNorm': row['GenNorm'],
+                    'HeadForm': row['HeadForm'], 'GenForm': row['GenForm'],
+                    'Rel': row['Rel'], 'HeadSem': '', 'GenSem': '', 'SetRel': ''}
+            data.append(pair)
+    return data
+
 
 def set_rel():
     """ if data[i]['HeadForm'][5] == 'y':
@@ -70,10 +83,9 @@ def set_rel():
     return
 
 
+corpus = read_file_with_norm_forms()
+mark_corpus(corpus)
 
-data = read_file()
-mark_corpus(data)
-
-#if kinsoc(data[i]) == 0:
-#    param(data[i])
-#writer.writerow([data[i][key] for key in data[i]])
+# if kinsoc(data[i]) == 0:
+#     param(data[i])
+# writer.writerow([data[i][key] for key in data[i]])
