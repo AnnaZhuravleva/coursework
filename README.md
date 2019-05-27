@@ -50,6 +50,7 @@ N(c|p)(m|f|n|c)(s|p)(n|g|d|a|i|l)(y|n)
 *   selecting semantic label for noun group
 
 ##### Other components
+
 ###### Folder [./data](https://github.com/AnnaZhuravleva/coursework/tree/master/code/data):
 * 'Data-set.csv' - initial data-set
 * 'Data-set_normilized.csv' - lemmatized data-set
@@ -68,7 +69,8 @@ Fileds are:
 Гиперонимы вершины WV, Гиперонимы зависимого WV - based on W2V
 ```
 
- ###### Folder [../data]](https://github.com/AnnaZhuravleva/coursework/tree/master/data)
+
+ ##### Folder [../data]](https://github.com/AnnaZhuravleva/coursework/tree/master/data)
  * Raw corpus (ruscorpora + news)
  * little part of raw news corpus - part of [corpus](http://corpus-i.maimbava.net/res01/rtb.php)
  * Raw new corpus (link above)
