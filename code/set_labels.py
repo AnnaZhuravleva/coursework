@@ -3,7 +3,7 @@ import csv
 from set_sem_rel import *
 
 
-rels_dict = ['None', 'KIN-SOC', 'MB', 'PAR', 'OB', 'SAG', 'POS', 'WH', 'ATR']
+rels_dict = ['None', 'KIN-SOC', 'MB', 'PAR', 'OB', 'SAG', 'POS', 'WH', 'ATR', 'OB']
 
 
 def read_file_with_sem_tags():
@@ -61,9 +61,14 @@ def set_r(data):
 
 
 def set_rvw(data):
+    # person = ['человек', 'деятель', 'родственник', 'должность']
+    members = ['деятель', 'должность', 'руководитель', 'глава', 'сотрудник']
+    groups = ['отдел', 'группа', 'организация', 'коллектив']
     relwv = 0
     if data['HeadSemVW'] == 'родственник':
         relwv = 1
+    if data['HeadSemVW'] in members and data['GenSemVW'] in groups:
+        relwv = 2
     if data['HeadSemVW'] == 'свойство':
         relwv = 3
     if data['HeadSemVW'] == 'действие':
@@ -72,6 +77,10 @@ def set_rvw(data):
         relwv = 5
     if data['HeadSemVW'] == 'предмет':
         relwv = 6
+    if data['HeadSemVW'] == 'исполнитель' and data['GenSemVW'] == 'событие':
+        relwv = 9
+    if relwv == 0:
+        relwv = 8
     return relwv
 
 
@@ -79,7 +88,7 @@ def set_rel(data):
     hit = 0
     hitwv = 0
     new_data = []
-    for i in range(int(input('Enter number of noun-groups that you want to get semantic class of: '))):
+    for i in range(int(input('Enter number of noun-groups that you want to get semantic class of: ')) - 1):
         rel = set_r(data[i])
         relwv = set_rvw(data[i])
         print(rels_dict[rel], rels_dict[relwv], data[i]['Rel'], data[i]['Head'], data[i]['Gen'])
@@ -99,13 +108,15 @@ def set_rel(data):
                 'Column   Gen     - Genitive\n'
                 '==========================================================================\n'
                 'RuTez      W2V     Initial     Head        Gen\n'
-                '---------------------------------------------------------------------------\n')
+                '--------------------------------------------------------------------------\n')
         for i in new_data:
             f.write('   '.join(i)+'\n')
-        f.write('---------------------------------------------------------------------------\n')
+        f.write('--------------------------------------------------------------------------\n')
         f.write('       '.join([str(hit/len(new_data)), str(hitwv/len(new_data))]))
-    print(datetime.datetime.now().strftime("%d-%m-%Y %H:%M"))
-    print(hit/len(new_data), hitwv/len(new_data))
+    print('\n----------------------------------------------------\n',
+          datetime.datetime.now().strftime("%d-%m-%Y %H:%M"), '\n',
+          hit/len(new_data), hitwv/len(new_data),
+          '\n----------------------------------------------------\n')
     return
 
 

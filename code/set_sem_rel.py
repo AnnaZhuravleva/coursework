@@ -76,6 +76,17 @@ def ob(data):
     return 0
 
 
+def sob(data):
+    a = [i.strip('()\"\[\]\'') for i in data['HeadSem'].split('\', \'')]
+    b = [i.strip('()\"\[\]\'') for i in data['GenSem'].split('\', \'')]
+    subjects = ['субъект деятельности', 'исполнитель']
+    if len(data['HeadForm']) == 6 and data['HeadForm'][5] == 'y' and data['HeadDer'] == 'Vt' and\
+            len(set(a).intersection(subjects)) > 0 and len(data['GenForm']) == 6 \
+            and data['GenForm'][5] == 'n' :
+        return 9
+    return 0
+
+
 def sag(data):
     sagents = ['обращение, высказывание', 'голос (совокупность звуков)', 'перестать, прекратить (что-то делать)',
                'влиять, воздействовать', 'удалить, исключить', 'изменить, сделать иным', 'движение, перемещение',

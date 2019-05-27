@@ -1,6 +1,4 @@
 print('You have to wait till all the components are installed...')
-
-
 from preprocess_corpus import *
 
 
