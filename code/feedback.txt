@@ -1,0 +1,112 @@
+27-05-2019 11:28
+==========================================================================
+Column   RuTez   - classification based on linguistic ontology 'RuTez'
+Column   W2V     - classification based on model 'RusVectores'
+Column   Initial - semantic relation from Data-set
+Column   Head    - Head Noun
+Column   Gen     - Genitive
+==========================================================================
+RuTez      W2V     Initial     Head        Gen
+---------------------------------------------------------------------------
+KIN-SOC   KIN-SOC   KIN-SOC   сын   партнера
+KIN-SOC   None   MB   вице-премьер   правительства
+KIN-SOC   None   KIN-SOC   представитель   президента
+MB   None   MB   президента   рф
+ATR   KIN-SOC   OB   оргaнизации   форума
+KIN-SOC   None   KIN-SOC   заместитель   главы
+MB   None   MB   главы   администрации
+ATR   None   MB   администрации   президента
+MB   None   MB   руководитель   отделения
+MB   SAG   ATR   профессор   биофизики
+ATR   KIN-SOC   ATR   отеделения   рентгенологии
+KIN-SOC   KIN-SOC   KIN-SOC   отец   малыша
+ATR   SAG   KIN-SOC   адвокат   дьявола
+MB   None   MB   директор   "би-би-си"
+OB   OB   OB   похищении   экспедитора
+MB   None   MB   экспедитора   компании
+ATR   None   ATR   обязанности   тренера
+MB   None   MB   директор   клуба
+POS   POS   POS   вещи   отца
+ATR   None   PAR   некорректность   высказываний
+KIN-SOC   KIN-SOC   KIN-SOC   женой   офицера
+ATR   POS   ATR   подробности   задержания
+MB   SAG   MB   обозреватель   "кп"
+KIN-SOC   KIN-SOC   KIN-SOC   друг   человека
+ATR   None   SAG   поручению   губернатора
+ATR   None   OB   подбором   площадок
+KIN-SOC   None   MB   зампред   правительства
+ATR   None   SAG   рекомендациям   комиссии
+ATR   None   SAG   приходом   тренера
+ATR   None   KIN-SOC   советник   председателя
+MB   None   MB   председателя   комитета
+KIN-SOC   KIN-SOC   KIN-SOC   друг   ребенка
+OB   POS   OB   добыча   омуля
+ATR   None   KIN-SOC   помощник   руководителя
+ATR   None   SAG   жалобы   приморцев
+ATR   OB   SAG   действия   команды
+ATR   None   POS   телефонов   граждан
+OB   None   OB   оценки   работы
+POS   None   POS   фамилии   присутствующих
+ATR   SAG   KIN-SOC   адвокат   сержанта
+ATR   SAG   SAG   власть   землевладельца
+ATR   None   SAG   разрешения   хозяина
+ATR   PAR   OB   содержание   архиерея
+PAR   KIN-SOC   POS   наша   ставка
+POS   None   POS   кресло   главы
+MB   None   MB   главы   района
+ATR   None   OB   проведения   агитации
+OB   SAG   MB   журналист   телеканала
+OB   OB   SAG   встречу   начальника
+MB   None   MB   начальника   отдела
+ATR   None   WH   отдела   прокуратуры
+ATR   OB   OB   съемках   программы
+ATR   OB   OB   преследования   гражданина
+ATR   OB   OB   обнаружения   имущества
+MB   None   KIN-SOC   партнер   компании
+ATR   OB   SAG   объяснения   редактора
+ATR   None   SAG   промах   редакции
+ATR   None   OB'   исполнителей   злодеяния
+ATR   OB   SAG   кара   аллаха
+ATR   PAR   POS   накопления   человека
+ATR   None   SAG   заседании   комиссии
+ATR   None   ATR   комиссии   области
+KIN-SOC   None   KIN-SOC   заместитель   комиссара
+MB   None   MB   комиссара   области
+MB   None   MB   начальник   отдела
+ATR   None   WH   отдела   призыва
+ATR   OB   SAG   утверждение   президента
+ATR   None   PAR   состав   правительства
+POS   None   POS   листы   директора
+POS   None   POS   место   афганистана
+KIN-SOC   KIN-SOC   KIN-SOC   родственник   вице-премьера
+OB   None   OB   экранизацией   произведений
+KIN-SOC   KIN-SOC   KIN-SOC   племянник   чародея
+ATR   None   SAG   платежи   покупателя
+KIN-SOC   None   MB   представителя   племени
+ATR   PAR   PAR   особенности   охоты
+ATR   OB   OB   поиск   донора
+OB   None   SAG   опеку   парня
+KIN-SOC   KIN-SOC   KIN-SOC   отец   живописца
+ATR   None   OB   консолидация   усилий
+ATR   None   SAG   работа   групп
+ATR   None   OB   строительство   домов
+KIN-SOC   None   KIN-SOC   заместитель   председателя
+MB   None   MB   председателя   правительства
+MB   None   MB   директором   департамента
+ATR   None   WH   департамента   мчс
+OB   None   OB   управления   защиты
+OB   None   OB   защиты   информации
+ATR   None   OB   обеспечения   безопасности
+ATR   None   PAR   безопасности   работ
+ATR   None   SAG   работ   ведомства
+ATR   None   OB   подписание   соглашения
+MB   None   MB   глава   мид
+MB   None   MB   президенте   рф
+ATR   KIN-SOC   KIN-SOC   вдова   артиста
+ATR   PAR   PAR   состояние   его
+ATR   PAR   PAR   тяжесть   течения
+ATR   OB   PAR   течения   заболевания
+KIN-SOC   KIN-SOC   KIN-SOC   мужем   людмилы
+ATR   None   OB   отбор   автомобилей
+---------------------------------------------------------------------------
+0.44       0.2
