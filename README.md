@@ -7,6 +7,7 @@
 * Python3 installed
 * Packages: pymorphy2, gensim
 * Data-set in '.csv' format 
+* Downloaded http://rusvectores.org/static/models/rusvectores2/ruscorpora_mystem_cbow_300_2_2015.bin.gz to the folder ./code
 
 ##### Expected data-set format:
 * Columns:
@@ -38,7 +39,7 @@ N(c|p)(m|f|n|c)(s|p)(n|g|d|a|i|l)(y|n)
  
  ## Program components
  
- ##### Python files
+ ##### Python files in folder [./code](https://github.com/AnnaZhuravleva/coursework/tree/master/code)
  ######  preprocess_corpus.py 
 *   lemmatizing words with [pymorpy2](https://pymorphy2.readthedocs.io/en/latest/) 
 *   creating set of hyperonyms based on [RuTez](http://www.labinform.ru/pub/ruthes/index.htm)
@@ -49,12 +50,13 @@ N(c|p)(m|f|n|c)(s|p)(n|g|d|a|i|l)(y|n)
 *   selecting semantic label for noun group
 
 ##### Other components
-###### Folder [./data]:
+
+###### Folder [./data](https://github.com/AnnaZhuravleva/coursework/tree/master/code/data):
 * 'Data-set.csv' - initial data-set
 * 'Data-set_normilized.csv' - lemmatized data-set
 
 You are able to check for any mistakes occurred while automatic morph-parsing
-######Folder [./sem_classes]
+######Folder [./sem_classes](https://github.com/AnnaZhuravleva/coursework/tree/master/code/sem_classes)
 * Corpus based on linguistic ontology  [RuTez](http://www.labinform.ru/pub/ruthes/index.htm)
 
 Also in folder [../data] you can find file 'rutez.py' which can help for updating corpus.
@@ -67,7 +69,8 @@ Fileds are:
 Гиперонимы вершины WV, Гиперонимы зависимого WV - based on W2V
 ```
 
- ###### Folder [../data]
+
+ ##### Folder [../data](https://github.com/AnnaZhuravleva/coursework/tree/master/data)
  * Raw corpus (ruscorpora + news)
  * little part of raw news corpus - part of [corpus](http://corpus-i.maimbava.net/res01/rtb.php)
  * Raw new corpus (link above)
