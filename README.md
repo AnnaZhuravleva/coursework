@@ -70,7 +70,7 @@ Fileds are:
 ```
 
 
- ##### Folder [../data]](https://github.com/AnnaZhuravleva/coursework/tree/master/data)
+ ##### Folder [../data](https://github.com/AnnaZhuravleva/coursework/tree/master/data)
  * Raw corpus (ruscorpora + news)
  * little part of raw news corpus - part of [corpus](http://corpus-i.maimbava.net/res01/rtb.php)
  * Raw new corpus (link above)
