@@ -39,7 +39,7 @@ N(c|p)(m|f|n|c)(s|p)(n|g|d|a|i|l)(y|n)
  
  ## Program components
  
- ##### Python files
+ ##### Python files in folder [./code](https://github.com/AnnaZhuravleva/coursework/tree/master/code)
  ######  preprocess_corpus.py 
 *   lemmatizing words with [pymorpy2](https://pymorphy2.readthedocs.io/en/latest/) 
 *   creating set of hyperonyms based on [RuTez](http://www.labinform.ru/pub/ruthes/index.htm)
