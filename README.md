@@ -7,6 +7,7 @@
 * Python3 installed
 * Packages: pymorphy2, gensim
 * Data-set in '.csv' format 
+* Downloaded http://rusvectores.org/static/models/rusvectores2/ruscorpora_mystem_cbow_300_2_2015.bin.gz to the folder ./code
 
 ##### Expected data-set format:
 * Columns:
